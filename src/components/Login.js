@@ -4,16 +4,26 @@
  */
 import react from "react"
 import {useSelector, useDispatch} from 'react-redux';
+import { useState } from "react";
 import {userLogin} from '../reducers/index';
 
 export default function Login(){
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
     const dispatch = useDispatch();
+    function getUsername(e){
+        setUsername(e.target.value);
+    }
+
+    function getPassword(e){
+        setPassword(e.target.value)
+    }
     return(
         <>
             <div>
-                <input placeholder="用户名..." type={'text'} style={styles.input}></input><br />
-                <input placeholder="密码..." type={'password'} style={styles.input}></input>
-                <button style={styles.button} onClick={()=>{dispatch(userLogin({payload:'userInfo'}))}}>登录</button>
+                <input placeholder="用户名..." type={'text'} style={styles.input} onChange={(e)=>{getUsername(e)}}></input><br />
+                <input placeholder="密码..." type={'password'} style={styles.input} onChange={(e)=>{getPassword(e)}}></input>
+                <button style={styles.button} onClick={()=>{dispatch(userLogin({payload:{username, password}}))}}>登录</button>
             </div>
         </>
     )
