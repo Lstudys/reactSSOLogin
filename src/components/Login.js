@@ -3,14 +3,17 @@
  * created by 李永晖 on 2022/01/10
  */
 import react from "react"
+import {useSelector, useDispatch} from 'react-redux';
+import {userLogin} from '../reducers/index';
 
 export default function Login(){
+    const dispatch = useDispatch();
     return(
         <>
             <div>
                 <input placeholder="用户名..." type={'text'} style={styles.input}></input><br />
                 <input placeholder="密码..." type={'password'} style={styles.input}></input>
-                <button style={styles.button}>登录</button>
+                <button style={styles.button} onClick={()=>{dispatch(userLogin({payload:'userInfo'}))}}>登录</button>
             </div>
         </>
     )
