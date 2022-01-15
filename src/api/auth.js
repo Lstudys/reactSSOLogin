@@ -17,3 +17,12 @@ export function login(data){
         header
     })
 }
+
+export function register(data){
+    return request({
+        url:'/register',
+        data:data,
+        method:'POST',
+        header
+    })
+}

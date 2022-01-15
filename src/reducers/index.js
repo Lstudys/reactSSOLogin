@@ -7,7 +7,7 @@ import {createSlice } from '@reduxjs/toolkit';
 
 import cookie from '../utils/cookie';
 import {key} from '../utils/cookie';
-import {login} from '../api/auth';
+import {login, register} from '../api/auth';
 
 const authSlice = createSlice ({
     name:'auth',
@@ -21,7 +21,7 @@ const authSlice = createSlice ({
         // 实际上是action
         // 调用时只传action即可，不会被当作第一个参数
         userLogin(state = authSlice.initialState, action){
-            console.log('action',action.payload);
+            // console.log('action',action.payload);
             login(action.payload).then(function(response){
                 console.log('response',response);
                 const {data} = response;
@@ -31,12 +31,18 @@ const authSlice = createSlice ({
                 cookie.set(key.refreshTokenKey, refresh_token);
                 cookie.set(key.userInfoKey, userInfo);
             })
+        },
+
+        userRegister(state = authSlice.initialState, action){
+            register(action.payload).then((response)=>{
+                console.log(response);
+            })
         }
     }
 });
 
 // action
-export const {userLogin} = authSlice.actions;
+export const {userLogin, userRegister} = authSlice.actions;
 
 // reducer
 export default authSlice.reducer;

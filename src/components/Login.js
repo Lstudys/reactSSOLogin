@@ -4,20 +4,28 @@
  */
 import react from "react"
 import {useSelector, useDispatch} from 'react-redux';
-import { useState } from "react";
+import { useState ,useCallback} from "react";
 import {userLogin} from '../reducers/index';
 
 export default function Login(){
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const dispatch = useDispatch();
-    function getUsername(e){
-        setUsername(e.target.value);
-    }
 
-    function getPassword(e){
-        setPassword(e.target.value)
-    }
+    const getUsername = useCallback(
+        (e) => {
+            setUsername(e.target.value);
+        },
+        [username],
+    )
+    
+    const getPassword = useCallback(
+        (e) => {
+            setPassword(e.target.value);
+        },
+        [password],
+    )
+
     return(
         <>
             <div>
